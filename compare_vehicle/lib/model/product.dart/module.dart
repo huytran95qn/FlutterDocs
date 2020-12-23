@@ -1,0 +1,10 @@
+export './accessory_items.dart';
+export './color_combinations.dart';
+export './colors.dart';
+export './fscDependencie.dart';
+export './price_items.dart';
+export './product.dart';
+export './spec_items.dart';
+export './spec_option_items.dart';
+export './spec_options.dart';
+export './specs.dart';
