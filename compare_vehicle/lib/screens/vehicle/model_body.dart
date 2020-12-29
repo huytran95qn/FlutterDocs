@@ -47,7 +47,7 @@ class _ModelBodyState extends State<ModelBody> {
       if(modelSelected.isNotEmpty) {
         _column.add(
           TTAnimationExpand(
-            child: _buildTrimView(),
+            child: _buildTrimView(modelSelected.single),
             hasExpand: modelSelected.isNotEmpty
           )
         );
@@ -159,16 +159,38 @@ class _ModelBodyState extends State<ModelBody> {
     );
   }
 
-  Widget _buildTrimView() {
+  Widget _buildTrimView(ModelGroups model) {
+    List<Widget> widget = [];
+    for (var i = 0; i < model.products.length; i++) {
+      final product = model.products[0];
+      widget.add(Container(
+        width: 360,
+        height: 120,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all()
+        ),
+        child: Text(product.trimDisplayName, style: TextStyle(color: Colors.black),),
+      ));
+    }
     return Container(
-      height: 200,
+      padding: EdgeInsets.only(left: 20, right: 20, bottom: 22),
       decoration: BoxDecoration(
         border: Border(
           bottom: boldBorderSide,
           left: boldBorderSide,
           right: boldBorderSide,
         )
-      )
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: 30,),
+          Text('3 Trims', style: TextStyle(color: Colors.black, fontSize: 16,	fontFamily: 'HyundaiSansHead', fontWeight: FontWeight.w700)),
+          SizedBox(height: 30,),
+          Row(children: widget,)
+        ]
+      ),
     );
   }
 
