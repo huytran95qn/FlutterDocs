@@ -1,5 +1,26 @@
 import 'package:compare_vehicle/model/module.dart';
 
+class ModelGroups {
+  String modelEnum;
+  String modelDisplayName;
+  String modelMappingKey;
+  String modelYearEnum;
+  String modelYearDisplayName;
+  String modelYearMappingKey;
+  bool isSelected;
+  List<Products> products;
+
+  ModelGroups({Products product}) {
+    this.modelEnum = product.modelEnum;
+    this.modelDisplayName = product.modelDisplayName;
+    this.modelMappingKey = product.modelMappingKey;
+    this.modelYearEnum = product.modelYearEnum;
+    this.modelYearDisplayName = product.modelYearDisplayName;
+    this.modelYearMappingKey = product.modelYearMappingKey;
+    this.products = [product];
+    this.isSelected = false;
+  }
+}
 class Products {
   String _id;
   String _languageCodeEnum;

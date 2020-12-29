@@ -1,4 +1,4 @@
-class Colors {
+class ColorProduct {
   String _colorTypeEnum;
   String _colorId;
   String _colorCode;
@@ -7,7 +7,7 @@ class Colors {
   String _colorAdditionalTypeEnum;
   String _colorAdditionalTypeDisplayName;
 
-  Colors({
+  ColorProduct({
       String colorTypeEnum,
       String colorId,
       String colorCode,
@@ -46,7 +46,7 @@ class Colors {
   String get colorAdditionalTypeDisplayName => _colorAdditionalTypeDisplayName;
   set colorAdditionalTypeDisplayName(String colorAdditionalTypeDisplayName) => _colorAdditionalTypeDisplayName = colorAdditionalTypeDisplayName;
 
-  Colors.fromJson(Map<String, dynamic> json) {
+  ColorProduct.fromJson(Map<String, dynamic> json) {
     _colorTypeEnum = json['colorTypeEnum'];
     _colorId = json['colorId'];
     _colorCode = json['colorCode'];

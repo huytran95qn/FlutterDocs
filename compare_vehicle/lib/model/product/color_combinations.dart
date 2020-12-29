@@ -2,9 +2,9 @@ import 'package:compare_vehicle/model/module.dart';
 
 class ColorCombinations {
   String _colorCombinationId;
-  List<Colors> _colors;
+  List<ColorProduct> _colors;
 
-  ColorCombinations({String colorCombinationId, List<Colors> colors}) {
+  ColorCombinations({String colorCombinationId, List<ColorProduct> colors}) {
     this._colorCombinationId = colorCombinationId;
     this._colors = colors;
   }
@@ -12,15 +12,15 @@ class ColorCombinations {
   String get colorCombinationId => _colorCombinationId;
   set colorCombinationId(String colorCombinationId) =>
       _colorCombinationId = colorCombinationId;
-  List<Colors> get colors => _colors;
-  set colors(List<Colors> colors) => _colors = colors;
+  List<ColorProduct> get colors => _colors;
+  set colors(List<ColorProduct> colors) => _colors = colors;
 
   ColorCombinations.fromJson(Map<String, dynamic> json) {
     _colorCombinationId = json['colorCombinationId'];
     if (json['colors'] != null) {
-      _colors = new List<Colors>();
+      _colors = new List<ColorProduct>();
       json['colors'].forEach((v) {
-        _colors.add(new Colors.fromJson(v));
+        _colors.add(new ColorProduct.fromJson(v));
       });
     }
   }

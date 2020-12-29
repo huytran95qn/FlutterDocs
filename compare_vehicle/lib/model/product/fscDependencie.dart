@@ -8,6 +8,7 @@ class FscDependencies {
   List<SpecOptions> _specOptions;
   List<ColorCombinations> _colorCombinations;
   List<Specs> _specs;
+  List<PriceItems> _priceItems;
 
   FscDependencies({
       String fsc,
@@ -16,7 +17,8 @@ class FscDependencies {
       List<AccessoryItems> accessoryItems,
       List<SpecOptions> specOptions,
       List<ColorCombinations> colorCombinations,
-      List<Specs> specs
+      List<Specs> specs,
+      List<PriceItems> priceItems
   }) {
     this._fsc = fsc;
     this._fscMappingKey = fscMappingKey;
@@ -25,6 +27,7 @@ class FscDependencies {
     this._specOptions = specOptions;
     this._colorCombinations = colorCombinations;
     this._specs = specs;
+    this._priceItems = priceItems;
   }
 
   String get fsc => _fsc;
@@ -47,6 +50,9 @@ class FscDependencies {
   
   List<Specs> get specs => _specs;
   set specs(List<Specs> specs) => _specs = specs;
+
+  List<PriceItems> get priceItems => _priceItems;
+  set priceItems(List<PriceItems> priceItems) => _priceItems = priceItems;
 
   FscDependencies.fromJson(Map<String, dynamic> json) {
     _fsc = json['fsc'];
@@ -74,6 +80,12 @@ class FscDependencies {
       _specs = new List<Specs>();
       json['specs'].forEach((v) {
         _specs.add(new Specs.fromJson(v));
+      });
+    }
+    if (json['priceItems'] != null) {
+      _priceItems = new List<PriceItems>();
+      json['priceItems'].forEach((v) {
+        _priceItems.add(new PriceItems.fromJson(v));
       });
     }
   }

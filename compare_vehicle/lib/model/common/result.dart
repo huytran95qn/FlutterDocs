@@ -1,6 +1,6 @@
 import 'package:compare_vehicle/model/module.dart';
 
-class Result {
+class Result<T> {
   List<Products> _products;
 
   Result({List<Products> products}) {

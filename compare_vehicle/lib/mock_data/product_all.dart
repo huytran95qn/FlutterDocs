@@ -1140,7 +1140,7 @@ class MockProductAll {
                     "id": "OSEV_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "7\" Display",
+                    "specDescription": "7 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -1152,7 +1152,7 @@ class MockProductAll {
                     "id": "OSEV_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "7\" TFT",
+                    "specDescription": "7 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -3024,7 +3024,7 @@ class MockProductAll {
                     "id": "AEEV_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "8\" Display",
+                    "specDescription": "8 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -3036,7 +3036,7 @@ class MockProductAll {
                     "id": "AEEV_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "7\" TFT",
+                    "specDescription": "7 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -4698,7 +4698,7 @@ class MockProductAll {
                     "id": "LX2_wheel",
                     "specCode": "wheel",
                     "specTitle": "Wheel",
-                    "specDescription": "18\" Alloy Wheel",
+                    "specDescription": "18 Alloy Wheel",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -4908,7 +4908,7 @@ class MockProductAll {
                     "id": "LX2_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "8\" Display",
+                    "specDescription": "8 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -4920,7 +4920,7 @@ class MockProductAll {
                     "id": "LX2_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "3.5\" TFT",
+                    "specDescription": "3.5 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -5489,7 +5489,7 @@ class MockProductAll {
                     "id": "LX2_wheel",
                     "specCode": "wheel",
                     "specTitle": "Wheel",
-                    "specDescription": "18\" Alloy Wheel",
+                    "specDescription": "18 Alloy Wheel",
                     "isActive": true,
                     "displayOrder": 0,
                     "additionalFields": null
@@ -6792,7 +6792,7 @@ class MockProductAll {
                     "id": "OS_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "7\" Display",
+                    "specDescription": "7 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -6804,7 +6804,7 @@ class MockProductAll {
                     "id": "OS_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "3.5\" TFT",
+                    "specDescription": "3.5 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -8676,7 +8676,7 @@ class MockProductAll {
                     "id": "AEEV_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "8\" Display (+ RDS)",
+                    "specDescription": "8 Display (+ RDS)",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -8688,7 +8688,7 @@ class MockProductAll {
                     "id": "AEEV_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "7\" TFT",
+                    "specDescription": "7 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -10462,7 +10462,7 @@ class MockProductAll {
                     "id": "LX2_wheel",
                     "specCode": "wheel",
                     "specTitle": "Wheel",
-                    "specDescription": "20\" Alloy Wheel",
+                    "specDescription": "20 Alloy Wheel",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -10672,7 +10672,7 @@ class MockProductAll {
                     "id": "LX2_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "8\" Display",
+                    "specDescription": "8 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -10684,7 +10684,7 @@ class MockProductAll {
                     "id": "LX2_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "7\" TFT",
+                    "specDescription": "7 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -11253,7 +11253,7 @@ class MockProductAll {
                     "id": "LX2_wheel",
                     "specCode": "wheel",
                     "specTitle": "Wheel",
-                    "specDescription": "20\" Alloy Wheel",
+                    "specDescription": "20 Alloy Wheel",
                     "isActive": true,
                     "displayOrder": 0,
                     "additionalFields": null
@@ -12458,7 +12458,7 @@ class MockProductAll {
                     "id": "LX2_wheel",
                     "specCode": "wheel",
                     "specTitle": "Wheel",
-                    "specDescription": "20\" Alloy Wheel",
+                    "specDescription": "20 Alloy Wheel",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -12668,7 +12668,7 @@ class MockProductAll {
                     "id": "LX2_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "8\" Display",
+                    "specDescription": "8 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -12680,7 +12680,7 @@ class MockProductAll {
                     "id": "LX2_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "7\" TFT",
+                    "specDescription": "7 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -13249,7 +13249,7 @@ class MockProductAll {
                     "id": "LX2_wheel",
                     "specCode": "wheel",
                     "specTitle": "Wheel",
-                    "specDescription": "20\" Alloy Wheel",
+                    "specDescription": "20 Alloy Wheel",
                     "isActive": true,
                     "displayOrder": 0,
                     "additionalFields": null
@@ -14524,7 +14524,7 @@ class MockProductAll {
                     "id": "OS_media",
                     "specCode": "media",
                     "specTitle": "Media",
-                    "specDescription": "7\" Display",
+                    "specDescription": "7 Display",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
@@ -14536,7 +14536,7 @@ class MockProductAll {
                     "id": "OS_cluster",
                     "specCode": "cluster",
                     "specTitle": "Cluster",
-                    "specDescription": "3.5\" TFT",
+                    "specDescription": "3.5 TFT",
                     "additionalFields": [
                       {
                         "additionalFieldName": "DisplayTypeEnum",
