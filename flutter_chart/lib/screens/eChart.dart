@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chart/screens/mock_data.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'dart:math';
 
 class EChart extends StatefulWidget {
   const EChart({ Key key }) : super(key: key);
@@ -10,38 +10,41 @@ class EChart extends StatefulWidget {
 }
 
 class _EChartState extends State<EChart> {
-  List<SalesData> dataSource;
+  List<PopularColorData> dataSource;
+  ZoomPanBehavior zooming;
   @override
   Widget build(BuildContext context) {
-    dataSource = new SalesData().mockDate();
+    dataSource = new PopularColorData().mockDate();
+    zooming = ZoomPanBehavior(
+      enableSelectionZooming: true,
+      enableDoubleTapZooming: true,
+      enablePinching: true,
+      enablePanning: true
+    );
     return Container(
       padding: EdgeInsets.all(16),
       child: SfCartesianChart(
         backgroundColor: Colors.white10,
-        
-        //
-        borderColor: Colors.blue,
-        borderWidth: 1,
+        title: ChartTitle(text: 'Default'),
+        primaryXAxis: CategoryAxis(),
+        //// ---------------------------------------------------
+        //// Color of the chart border.
+        // borderColor: Colors.blue,
+        // borderWidth: 1,
+        //// ---------------------------------------------------
 
-        plotAreaBackgroundColor: Colors.grey.withOpacity(0.5),
-        plotAreaBorderColor: Colors.blue,
-        plotAreaBorderWidth: 5,
+
+        //// ---------------------------------------------------
+        //// Background color of the plot area
+        // plotAreaBackgroundColor: Colors.grey.withOpacity(0.5),
+        // plotAreaBorderColor: Colors.blue,
+        // plotAreaBorderWidth: 5,
         // plotAreaBackgroundImage: Image.asset(name)
+        //// ----------------------------------------------------
 
-        // tooltip
-        tooltipBehavior: TooltipBehavior(
-          enable: true,
-          builder: (dynamic data, dynamic point, dynamic series, int pointIndex, int seriesIndex) {
-            final value = data as SalesData;
-            return Container(
-              child: Text(
-                'PointIndex : ${value.data[seriesIndex]}'
-              )
-            );
-          }
-        ),
-        onTooltipRender: (TooltipArgs args) => {},
 
+        //// ---------------------------------------------------
+        //// Axis and data label
         // onActualRangeChanged: (ActualRangeChangedArgs args) => print('onActualRangeChanged ${args.visibleMin}'),
         // onAxisLabelRender: (AxisLabelRenderArgs args) => args.text = 'axis Label',
         // onDataLabelRender: (DataLabelRenderArgs args) {
@@ -54,79 +57,55 @@ class _EChartState extends State<EChart> {
         //     args.color = Colors.red;
         //   }
         // },
+        //// ---------------------------------------------------
+        
 
-        //
-        // onTrackballPositionChanging: (TrackballArgs args) {
-        //   final chartInfo = args.chartPointInfo;
-        //   args.chartPointInfo.label = chartInfo.header;
-        // },
-        // trackballBehavior: TrackballBehavior(
-        //   enable: true
+        //// ---------------------------------------------------
+        // Creating an argument constructor of Legend class.
+        // legend: Legend(
+        //   isVisible: true,
+        //   position: LegendPosition.bottom
         // ),
+        //// ---------------------------------------------------
+        
+        //// don't know
+        //// ---------------------------------------------------
+        // onTrendlineRender: (TrendlineRenderArgs args) => trendline(args),
+        //// ---------------------------------------------------
 
+        //// ---------------------------------------------------
+        //// don't know
+        // axes: <ChartAxis>[
+        //   NumericAxis(
+        //     majorGridLines: MajorGridLines(color: Colors.red, width: 20, dashArray: [1, 2])
+        //   )
+        // ],
+        // enableSideBySideSeriesPlacement: false,
+        //// ---------------------------------------------------
+        
+        //// onPointTapped
+        //// onDataLabelTapped
+        //// onAxisLabelTapped
+        //// onLegendTapped
         //
         // onLegendItemRender: (LegendRenderArgs args) => args.seriesIndex = 2,
-        
-        // crosshairBehavior: CrosshairBehavior(enable: true),
-        // onCrosshairPositionChanging: (CrosshairRenderArgs args) => crosshair(args),
-
-        //
-        zoomPanBehavior: ZoomPanBehavior(
-          enableDoubleTapZooming: true,
-          enablePanning: true,
-          enablePinching: true,
-          enableSelectionZooming: true
-        ),
-        onZooming: (ZoomPanArgs args){
-          print('---------------------------------------------');
-          print('onZooming');
-          print('currentZoomFactor ${args.currentZoomFactor}');
-          print('currentZoomPosition ${args.currentZoomPosition}');
-          print('----------------------------------------------');
-        },
-        onZoomStart: (ZoomPanArgs args){
-          print('---------------------------------------------');
-          print('onZoomStart');
-          print('currentZoomFactor ${args.currentZoomFactor}');
-          print('currentZoomPosition ${args.currentZoomPosition}');
-          print('----------------------------------------------');
-        },
-        onZoomEnd: (ZoomPanArgs args){
-          print('---------------------------------------------');
-          print('onZoomEnd');
-          print('currentZoomFactor ${args.currentZoomFactor}');
-          print('currentZoomPosition ${args.currentZoomPosition}');
-          print('----------------------------------------------');
-        },
-        onZoomReset: (ZoomPanArgs args){
-          print('---------------------------------------------');
-          print('onZoomReset');
-          print('currentZoomFactor ${args.currentZoomFactor}');
-          print('currentZoomPosition ${args.currentZoomPosition}');
-          print('----------------------------------------------');
-        },
-        
-
-        legend: Legend(isVisible: true),
-        title: ChartTitle(text: 'Half yearly sales analysis'),
-        primaryXAxis: CategoryAxis(),
-        series: <StackedBarSeries<SalesData, String>>[
+        series: <StackedBarSeries<PopularColorData, String>>[
           dataSourceChart(),
-          StackedBarSeries<SalesData, String>(
+          StackedBarSeries<PopularColorData, String>(
             dataSource: dataSource,
             sortingOrder: SortingOrder.descending,
-            sortFieldValueMapper: (SalesData item, _) => item.color,
-            pointColorMapper: (SalesData item, _) => Colors.yellow,
-            xValueMapper: (SalesData item, _) => item.color,
-            yValueMapper: (SalesData item, _) => item.data[0]
+            sortFieldValueMapper: (PopularColorData item, _) => item.color,
+            pointColorMapper: (PopularColorData item, _) => Colors.yellow,
+            xValueMapper: (PopularColorData item, _) => item.color,
+            yValueMapper: (PopularColorData item, _) => item.data[1].percentage
           ),
-          StackedBarSeries<SalesData, String>(
+          StackedBarSeries<PopularColorData, String>(
             dataSource: dataSource,
             sortingOrder: SortingOrder.descending,
-            sortFieldValueMapper: (SalesData item, _) => item.color,
-            pointColorMapper: (SalesData item, _) => Colors.green,
-            xValueMapper: (SalesData item, _) => item.color,
-            yValueMapper: (SalesData item, _) => item.data[0]
+            sortFieldValueMapper: (PopularColorData item, _) => item.color,
+            pointColorMapper: (PopularColorData item, _) => Colors.green,
+            xValueMapper: (PopularColorData item, _) => item.color,
+            yValueMapper: (PopularColorData item, _) => item.data[2].percentage
           )
         ]
       ),
@@ -137,22 +116,22 @@ class _EChartState extends State<EChart> {
   }
 
   dataSourceChart() {
-    return StackedBarSeries<SalesData, String>(
+    return StackedBarSeries<PopularColorData, String>(
       dataSource: dataSource,
 
       //
       sortingOrder: SortingOrder.descending,
-      sortFieldValueMapper: (SalesData item, _) => item.color,
+      sortFieldValueMapper: (PopularColorData item, _) => item.color,
       
       //
-      pointColorMapper: (SalesData item, _) => Colors.red,
+      pointColorMapper: (PopularColorData item, _) => Colors.red,
       
       //
-      xValueMapper: (SalesData item, _) => item.color,
-      yValueMapper: (SalesData item, _) => item.data[0],
+      xValueMapper: (PopularColorData item, _) => item.color,
+      yValueMapper: (PopularColorData item, _) => item.data[0].percentage,
 
       //
-      dataLabelMapper: (SalesData item, _) => 'Hello ${item.color}',
+      dataLabelMapper: (PopularColorData item, _) => 'Hello ${item.data[0].name}',
       dataLabelSettings: DataLabelSettings(
           isVisible: true,
 
@@ -161,10 +140,8 @@ class _EChartState extends State<EChart> {
           labelAlignment: ChartDataLabelAlignment.middle,
           
           textStyle: TextStyle(color: Colors.black),
-          // color: Colors.black
           opacity: 0.5,
           color: Colors.green,
-
 
           //
           margin: EdgeInsets.all(2),
@@ -199,29 +176,41 @@ class _EChartState extends State<EChart> {
   void tool(TooltipArgs args) {
      args.locationX = 30;
   }
-}
 
-class SalesData {
-  final String color;
-  List<int> data = [];
-  SalesData({this.color}) {
-    data.add(randomValue());
-    data.add(randomValue());
-    data.add(randomValue());
+  toolTip(ColorData data) {
+    return Container(
+      color: Colors.grey,
+      width: 100,
+      height: 50,
+      child: Column(
+        children: [
+          Text(data.name),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 12,
+                height: 12,
+                margin: EdgeInsets.only(right: 4),
+                decoration: BoxDecoration(
+                  color: Colors.yellow,
+                  borderRadius: BorderRadius.circular(50)
+                ),
+              ),
+              Text('${data.percentage}')
+            ],
+          )
+        ],
+      ),
+    );
   }
 
-  List<SalesData> mockDate() {
-    List<SalesData> list = [];
-    list.add(SalesData(color: 'Pink'));
-    list.add(SalesData(color: 'Green'));
-    list.add(SalesData(color: 'Blue'));
-    list.add(SalesData(color: 'Red'));
-    list.add(SalesData(color: 'Purple'));
-    return list;
+  void trendline(TrendlineRenderArgs args) {
+    print('trendline');
+    print(args.seriesIndex);
   }
 
-  int randomValue() {
-    final random = Random();
-    return 20 + random.nextInt(30);
+  void trackball(TrackballArgs args) {
+    args.chartPointInfo.label = '${args.chartPointInfo.header} - ${args.chartPointInfo.label}';
   }
 }
