@@ -104,33 +104,22 @@ class HorizontalDataTable extends StatefulWidget {
     this.htdRefreshController,
     this.onRefresh,
     this.refreshIndicator,
-  })  : assert(
-            (leftSideChildren == null && leftSideItemBuilder != null) ||
-                (leftSideChildren != null),
+  })  : assert((leftSideChildren == null && leftSideItemBuilder != null) || (leftSideChildren != null),
             'Either using itemBuilder or children to assign left side widgets'),
-        assert(
-            (rightSideChildren == null && rightSideItemBuilder != null) ||
-                (rightSideChildren != null),
+        assert((rightSideChildren == null && rightSideItemBuilder != null) || (rightSideChildren != null),
             'Either using itemBuilder or children to assign right side widgets'),
         assert((isFixedHeader && headerWidgets != null) || !isFixedHeader,
             'If use fixed top row header, isFixedHeader==true, headerWidgets must not be null'),
         assert(itemCount >= 0, 'itemCount must >= 0'),
         assert(elevation >= 0.0, 'elevation must >= 0.0'),
         assert(elevationColor != null, 'elevationColor must not be null'),
-        assert(
-            (enablePullToRefresh && refreshIndicatorHeight >= 0.0) ||
-                !enablePullToRefresh,
+        assert((enablePullToRefresh && refreshIndicatorHeight >= 0.0) || !enablePullToRefresh,
             'refreshIndicator must >= 0 if pull to refresh is enabled'),
-        assert(
-            (enablePullToRefresh && refreshIndicator != null) ||
-                !enablePullToRefresh,
+        assert((enablePullToRefresh && refreshIndicator != null) || !enablePullToRefresh,
             'refreshIndicator must not be null if pull to refresh is enabled'),
-        assert(
-            (enablePullToRefresh && htdRefreshController != null) ||
-                !enablePullToRefresh,
+        assert((enablePullToRefresh && htdRefreshController != null) || !enablePullToRefresh,
             'htdRefreshController must not be null if pull to refresh is enabled'),
-        assert(
-            (enablePullToRefresh && onRefresh != null) || !enablePullToRefresh,
+        assert((enablePullToRefresh && onRefresh != null) || !enablePullToRefresh,
             'onRefresh must not be null if pull to refresh is enabled');
 
   @override
@@ -140,10 +129,8 @@ class HorizontalDataTable extends StatefulWidget {
 }
 
 class _HorizontalDataTableState extends State<HorizontalDataTable> {
-  ScrollController _leftHandSideListViewScrollController =
-      ScrollController(debugLabel: 'Left');
-  ScrollController _rightHandSideListViewScrollController =
-      ScrollController(debugLabel: 'Right');
+  ScrollController _leftHandSideListViewScrollController = ScrollController(debugLabel: 'Left');
+  ScrollController _rightHandSideListViewScrollController = ScrollController(debugLabel: 'Right');
   ScrollController _rightHorizontalScrollController = ScrollController();
 
   ScrollShadowModel _scrollShadowModel = ScrollShadowModel();
@@ -157,34 +144,27 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
     if (widget.enablePullToRefresh) {
       _refreshController = RefreshController(initialRefresh: false);
       widget.htdRefreshController.setRefreshController(_refreshController);
-      _syncScroller = _SyncScrollControllerManager(
-          _refreshController, widget.refreshIndicatorHeight);
+      _syncScroller = _SyncScrollControllerManager(_refreshController, widget.refreshIndicatorHeight);
     } else {
       _syncScroller = _SyncScrollControllerManager(_refreshController);
     }
 
-    _syncScroller
-        .registerScrollController(_leftHandSideListViewScrollController);
-    _syncScroller
-        .registerScrollController(_rightHandSideListViewScrollController);
+    _syncScroller.registerScrollController(_leftHandSideListViewScrollController);
+    _syncScroller.registerScrollController(_rightHandSideListViewScrollController);
     _leftHandSideListViewScrollController.addListener(() {
-      _scrollShadowModel.verticalOffset =
-          _leftHandSideListViewScrollController.offset;
+      _scrollShadowModel.verticalOffset = _leftHandSideListViewScrollController.offset;
       setState(() {});
     });
     _rightHorizontalScrollController.addListener(() {
-      _scrollShadowModel.horizontalOffset =
-          _rightHorizontalScrollController.offset;
+      _scrollShadowModel.horizontalOffset = _rightHorizontalScrollController.offset;
       setState(() {});
     });
   }
 
   @override
   void dispose() {
-    _syncScroller
-        .unregisterScrollController(_leftHandSideListViewScrollController);
-    _syncScroller
-        .unregisterScrollController(_rightHandSideListViewScrollController);
+    _syncScroller.unregisterScrollController(_leftHandSideListViewScrollController);
+    _syncScroller.unregisterScrollController(_rightHandSideListViewScrollController);
     _leftHandSideListViewScrollController.dispose();
     _rightHandSideListViewScrollController.dispose();
     _rightHorizontalScrollController.dispose();
@@ -199,8 +179,7 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
       child: SafeArea(
         child: LayoutBuilder(
           builder: (context, boxConstraint) {
-            return _getParallelListView(
-                boxConstraint.maxWidth, boxConstraint.maxHeight);
+            return _getParallelListView(boxConstraint.maxWidth, boxConstraint.maxHeight);
           },
         ),
       ),
@@ -247,25 +226,24 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
 //                      color: widget.leftHandSideColBackgroundColor,
 //                      child: child,
 //                      elevation: _getElevation(horizontalOffset),
-                        decoration: BoxDecoration(
-                      color: widget.rightHandSideColBackgroundColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: widget.elevationColor.withAlpha(
-                              _getShadowAlpha(_getElevation(horizontalOffset),
-                                  widget.elevation)),
-                          blurRadius: 0.0,
-                          // has the effect of softening the shadow
-                          spreadRadius: 0.0,
-                          // has the effect of extending the shadow
-                          offset: Offset(
-                            _getElevation(horizontalOffset),
-                            // horizontal, move right 10
-                            0.0, // vertical, move down 10
-                          ),
-                        )
-                      ],
-                    )),
+                      decoration: BoxDecoration(
+                        color: widget.rightHandSideColBackgroundColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: widget.elevationColor.withAlpha(_getShadowAlpha(_getElevation(horizontalOffset), widget.elevation)),
+                            blurRadius: 0.0,
+                            // has the effect of softening the shadow
+                            spreadRadius: 0.0,
+                            // has the effect of extending the shadow
+                            offset: Offset(
+                              _getElevation(horizontalOffset),
+                              // horizontal, move right 10
+                              0.0, // vertical, move down 10
+                            ),
+                          )
+                        ],
+                      )
+                    ),
                   ),
                   child
                 ],
@@ -295,23 +273,19 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
                         color: widget.leftHandSideColBackgroundColor,
                         boxShadow: [
                           BoxShadow(
-                            color: widget.elevationColor.withAlpha(
-                                _getShadowAlpha(_getElevation(verticalOffset),
-                                    widget.elevation)),
+                            color:
+                                widget.elevationColor.withAlpha(_getShadowAlpha(_getElevation(verticalOffset), widget.elevation)),
                             blurRadius: 0.0,
                             // has the effect of softening the shadow
                             spreadRadius: 0.0,
                             // has the effect of extending the shadow
                             offset: Offset(
                               0.0, // horizontal, move right 10
-                              _getElevation(
-                                  verticalOffset), // vertical, move down 10
+                              _getElevation(verticalOffset), // vertical, move down 10
                             ),
                           )
                         ],
                       ),
-//                    child: child,
-//                elevation: _getElevation(verticalOffset),
                     ),
                   ),
                   child
@@ -320,14 +294,11 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
             },
           ),
           widget.rowSeparatorWidget,
-          Expanded(
-              child: _getScrollColumn(_getLeftHandSideListView(),
-                  this._leftHandSideListViewScrollController)),
+          Expanded(child: _getScrollColumn(_getLeftHandSideListView(), this._leftHandSideListViewScrollController)),
         ],
       );
     } else {
-      return _getScrollColumn(_getLeftHandSideListView(),
-          this._leftHandSideListViewScrollController);
+      return _getScrollColumn(_getLeftHandSideListView(), this._leftHandSideListViewScrollController);
     }
   }
 
@@ -336,17 +307,14 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
       List<Widget> widgetList = [];
       //headers
       widgetList.add(Selector<ScrollShadowModel, double>(
-          selector: (context, scrollShadowModel) {
-            return scrollShadowModel?.verticalOffset ?? 0;
-          },
+          selector: (context, scrollShadowModel) => scrollShadowModel?.verticalOffset ?? 0,
           builder: (context, verticalOffset, child) {
             return Container(
               decoration: BoxDecoration(
                 color: widget.rightHandSideColBackgroundColor,
                 boxShadow: [
                   BoxShadow(
-                    color: widget.elevationColor.withAlpha(_getShadowAlpha(
-                        _getElevation(verticalOffset), widget.elevation)),
+                    color: widget.elevationColor.withAlpha(_getShadowAlpha(_getElevation(verticalOffset), widget.elevation)),
                     blurRadius: 0.0,
                     // has the effect of softening the shadow
                     spreadRadius: 0.0,
@@ -359,24 +327,19 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
                 ],
               ),
               child: child,
-//                elevation: _getElevation(verticalOffset)
             );
           },
-          child: Row(children: widget.headerWidgets.sublist(1))));
-      widgetList.add(
-        widget.rowSeparatorWidget,
+          child: Row(children: widget.headerWidgets.sublist(1))
+        )
       );
+      widgetList.add(widget.rowSeparatorWidget);
       //ListView
       widgetList.add(Expanded(
-        child: _getScrollColumn(_getRightHandSideListView(),
-            this._rightHandSideListViewScrollController),
+        child: _getScrollColumn(_getRightHandSideListView(), this._rightHandSideListViewScrollController),
       ));
-      return Column(
-        children: widgetList,
-      );
+      return Column(children: widgetList);
     } else {
-      return _getScrollColumn(_getRightHandSideListView(),
-          this._rightHandSideListViewScrollController);
+      return _getScrollColumn(_getRightHandSideListView(), this._rightHandSideListViewScrollController);
     }
   }
 
@@ -393,37 +356,28 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
   Widget _getRightHandSideListView() {
     if (widget.enablePullToRefresh) {
       return _getPullToRefreshRightListView(
-          _rightHandSideListViewScrollController,
-          widget.rightSideItemBuilder,
-          widget.itemCount,
-          widget.rightSideChildren);
+        _rightHandSideListViewScrollController, widget.rightSideItemBuilder, widget.itemCount, widget.rightSideChildren
+      );
     } else {
       return _getListView(
-          _rightHandSideListViewScrollController,
-          widget.rightSideItemBuilder,
-          widget.itemCount,
-          widget.rightSideChildren);
+        _rightHandSideListViewScrollController, widget.rightSideItemBuilder, widget.itemCount, widget.rightSideChildren
+      );
     }
   }
 
   Widget _getLeftHandSideListView() {
     if (widget.enablePullToRefresh) {
       return _getPullToRefreshLeftListView(
-          _leftHandSideListViewScrollController,
-          widget.leftSideItemBuilder,
-          widget.itemCount,
-          widget.leftSideChildren);
+        _leftHandSideListViewScrollController, widget.leftSideItemBuilder, widget.itemCount, widget.leftSideChildren
+      );
     } else {
       return _getListView(
-          _leftHandSideListViewScrollController,
-          widget.leftSideItemBuilder,
-          widget.itemCount,
-          widget.leftSideChildren);
+        _leftHandSideListViewScrollController, widget.leftSideItemBuilder, widget.itemCount, widget.leftSideChildren
+      );
     }
   }
 
-  Widget _getListView(ScrollController scrollController,
-      IndexedWidgetBuilder indexedWidgetBuilder, int itemCount,
+  Widget _getListView(ScrollController scrollController, IndexedWidgetBuilder indexedWidgetBuilder, int itemCount,
       [List<Widget> children]) {
     if (indexedWidgetBuilder != null) {
       return ListView.separated(
@@ -442,8 +396,8 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
     }
   }
 
-  Widget _getPullToRefreshRightListView(ScrollController scrollController,
-      IndexedWidgetBuilder indexedWidgetBuilder, int itemCount,
+  Widget _getPullToRefreshRightListView(
+      ScrollController scrollController, IndexedWidgetBuilder indexedWidgetBuilder, int itemCount,
       [List<Widget> children]) {
     if (indexedWidgetBuilder != null) {
       return SmartRefresher(
@@ -472,8 +426,8 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
     }
   }
 
-  Widget _getPullToRefreshLeftListView(ScrollController scrollController,
-      IndexedWidgetBuilder indexedWidgetBuilder, int itemCount,
+  Widget _getPullToRefreshLeftListView(
+      ScrollController scrollController, IndexedWidgetBuilder indexedWidgetBuilder, int itemCount,
       [List<Widget> children]) {
     if (indexedWidgetBuilder != null) {
       return ListView.separated(
@@ -513,8 +467,7 @@ class _HorizontalDataTableState extends State<HorizontalDataTable> {
 }
 
 class _SyncScrollControllerManager {
-  _SyncScrollControllerManager(RefreshController refreshController,
-      [double refreshIndicatorHeight = 0.0]) {
+  _SyncScrollControllerManager(RefreshController refreshController, [double refreshIndicatorHeight = 0.0]) {
     _refreshController = refreshController;
     _refreshIndicatorHeight = refreshIndicatorHeight;
   }
@@ -535,8 +488,7 @@ class _SyncScrollControllerManager {
     _registeredScrollControllers.remove(controller);
   }
 
-  void processNotification(
-      ScrollNotification notification, ScrollController sender) {
+  void processNotification(ScrollNotification notification, ScrollController sender) {
     if (notification is ScrollStartNotification && !_scrollingActive) {
       _scrollingController = sender;
       _scrollingActive = true;
@@ -558,12 +510,10 @@ class _SyncScrollControllerManager {
                 if (_refreshController != null) {
                   switch (controller.debugLabel) {
                     case 'Left':
-                      _syncLeftListViewScrollVontroller(
-                          _scrollingController, controller);
+                      _syncLeftListViewScrollVontroller(_scrollingController, controller);
                       break;
                     case 'Right':
-                      _syncRightListViewScrollVontroller(
-                          _scrollingController, controller);
+                      _syncRightListViewScrollVontroller(_scrollingController, controller);
                       break;
                   }
                 } else {
@@ -578,11 +528,7 @@ class _SyncScrollControllerManager {
     }
   }
 
-  void _syncLeftListViewScrollVontroller(
-      ScrollController _scrollingController, ScrollController controller) {
-    // debugPrint(
-    //     'offset: ${_scrollingController.offset}; cached $_cacheScrollOffset');
-    // debugPrint('status: ${_refreshController.headerStatus}');
+  void _syncLeftListViewScrollVontroller(ScrollController _scrollingController, ScrollController controller) {
     switch (_refreshController.headerStatus) {
       case RefreshStatus.canRefresh:
         {
@@ -607,17 +553,14 @@ class _SyncScrollControllerManager {
     controller.jumpTo(_scrollingController.offset);
   }
 
-  void _syncRightListViewScrollVontroller(
-      ScrollController _scrollingController, ScrollController controller) {
+  void _syncRightListViewScrollVontroller(ScrollController _scrollingController, ScrollController controller) {
     if (!_scrollingController.position.outOfRange) {
       controller.jumpTo(_scrollingController.offset);
     } else {
       if (_scrollingController.offset <= 0.0) {
-        _scrollingController
-            .jumpTo(_scrollingController.position.minScrollExtent);
+        _scrollingController.jumpTo(_scrollingController.position.minScrollExtent);
       } else {
-        _scrollingController
-            .jumpTo(_scrollingController.position.maxScrollExtent);
+        _scrollingController.jumpTo(_scrollingController.position.maxScrollExtent);
       }
     }
   }
