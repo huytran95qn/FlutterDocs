@@ -12,10 +12,30 @@ class User {
           _random.nextBool(),
           '+${_random.nextInt(30)} ${_random.nextInt(1000)} ${_random.nextInt(1000)}',
           '2019-01-01',
-          'N/A'
+          'N/A',
+          initChildData(10, 'User_$i')
         )
       );
     }
+  }
+
+  List<UserInfo> initChildData(int size, String parentName) {
+    List<UserInfo> _child = [];
+    for (int i = 0; i < size; i++) {
+      final _random = new Random();
+      _child.add(
+        UserInfo(
+          "User child_$i of $parentName",
+          _random.nextBool(),
+          '+${_random.nextInt(30)} ${_random.nextInt(1000)} ${_random.nextInt(1000)}',
+          '2019-01-01',
+          'N/A',
+          []
+        )
+      );
+    }
+
+    return _child;
   }
 
   ///
@@ -51,7 +71,13 @@ class UserInfo {
   String phone;
   String registerDate;
   String terminationDate;
-
-  UserInfo(this.name, this.status, this.phone, this.registerDate,
-      this.terminationDate);
+  List<UserInfo> child;
+  UserInfo(
+    this.name,
+    this.status,
+    this.phone,
+    this.registerDate,
+    this.terminationDate,
+    this.child
+  );
 }

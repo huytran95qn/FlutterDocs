@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_table/horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_table/model/user/user.dart';
+import 'package:flutter_table/table/table.dart';
 
 class HorizontalDataTableLib extends StatefulWidget {
   const HorizontalDataTableLib({ Key key }) : super(key: key);
@@ -10,8 +11,6 @@ class HorizontalDataTableLib extends StatefulWidget {
 }
 
 class _HorizontalDataTableLibState extends State<HorizontalDataTableLib> {
-  HDTRefreshController _hdtRefreshController = HDTRefreshController();
-
   static const int sortName = 0;
   static const int sortStatus = 1;
   bool isAscending = true;
@@ -20,7 +19,7 @@ class _HorizontalDataTableLibState extends State<HorizontalDataTableLib> {
 
   @override
   void initState() {
-    user.initData(100);
+    user.initData(20);
     super.initState();
   }
 
@@ -33,29 +32,15 @@ class _HorizontalDataTableLibState extends State<HorizontalDataTableLib> {
   Widget _getBodyWidget() {
     return Container(
       child: HorizontalDataTable(
-        leftHandSideColumnWidth: 100,
-        rightHandSideColumnWidth: 650,
-        isFixedHeader: true,
         headerWidgets: _getTitleWidget(),
-        leftSideItemBuilder: _generateFirstColumnRow,
-        rightSideItemBuilder: _generateRightHandSideColumnRow,
+        itemBuilder: _generateAdditional,
         itemCount: user.userInfo.length,
         rowSeparatorWidget: const Divider(
           color: Colors.black54,
           height: 1.0,
           thickness: 0.0,
         ),
-        leftHandSideColBackgroundColor: Color(0xFFFFFFFF),
-        rightHandSideColBackgroundColor: Color(0xFFFFFFFF),
-        enablePullToRefresh: true,
-        refreshIndicator: const WaterDropHeader(),
-        refreshIndicatorHeight: 60,
-        onRefresh: () async {
-          //Do sth
-          await Future.delayed(const Duration(milliseconds: 500));
-          _hdtRefreshController.refreshCompleted();
-        },
-        htdRefreshController: _hdtRefreshController,
+        sideColBackgroundColor: Color(0xFFFFFFFF),
       ),
       height: MediaQuery.of(context).size.height,
     );
@@ -65,9 +50,7 @@ class _HorizontalDataTableLibState extends State<HorizontalDataTableLib> {
     return [
       FlatButton(
         padding: EdgeInsets.all(0),
-        child: _getTitleItemWidget(
-          'Name' + (sortType == sortName ? (isAscending ? '↓' : '↑') : ''), 100
-        ),
+        child: _getTitleItemWidget('Name' + (sortType == sortName ? (isAscending ? '↓' : '↑') : '')),
         onPressed: () {
           sortType = sortName;
           isAscending = !isAscending;
@@ -77,9 +60,7 @@ class _HorizontalDataTableLibState extends State<HorizontalDataTableLib> {
       ),
       FlatButton(
         padding: EdgeInsets.all(0),
-        child: _getTitleItemWidget(
-          'Status' + (sortType == sortStatus ? (isAscending ? '↓' : '↑') : ''), 100
-        ),
+        child: _getTitleItemWidget('Status' + (sortType == sortStatus ? (isAscending ? '↓' : '↑') : '')),
         onPressed: () {
           sortType = sortStatus;
           isAscending = !isAscending;
@@ -87,81 +68,94 @@ class _HorizontalDataTableLibState extends State<HorizontalDataTableLib> {
           setState(() {});
         },
       ),
-      _getTitleItemWidget('Phone', 200),
-      _getTitleItemWidget('Register', 100),
-      _getTitleItemWidget('Termination', 200),
-      _getTitleItemWidget('Action', 50),
+      _getTitleItemWidget('Phone'),
+      _getTitleItemWidget('Register'),
+      _getTitleItemWidget('Termination'),
+      _getTitleItemWidget('Action', alignment: Alignment.center),
     ];
   }
 
-  Widget _getTitleItemWidget(String label, double width) {
+  Widget _getTitleItemWidget(String label, {AlignmentGeometry alignment = Alignment.centerLeft }) {
     return Container(
       child: Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
-      width: width,
       height: 56,
       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
+      alignment: alignment,
     );
   }
 
-  Widget _generateFirstColumnRow(BuildContext context, int index) {
-    return Container(
-      child: Text(user.userInfo[index].name),
-      width: 100,
-      height: 52,
-      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-      alignment: Alignment.centerLeft,
+  Widget _generateAdditional(BuildContext context, int index) {
+    return Column(
+      children: [
+        _generateRightHandSideColumnRow(context, index),
+        HorizontalTable(
+          userChild: user.userInfo[index].child,
+        )
+      ],
     );
   }
 
   Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
     return Row(
       children: <Widget>[
-        Container(
-          child: Row(
-            children: <Widget>[
-              Icon(
-                  user.userInfo[index].status
-                      ? Icons.notifications_off
-                      : Icons.notifications_active,
-                  color:
-                      user.userInfo[index].status ? Colors.red : Colors.green),
-              Text(user.userInfo[index].status ? 'Disabled' : 'Active')
-            ],
-          ),
-          width: 100,
-          height: 52,
-          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.centerLeft,
+        Expanded(
+          child: Container(
+            child: Text(user.userInfo[index].name),
+            height: 52,
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+          )
         ),
-        Container(
-          child: Text(user.userInfo[index].phone),
-          width: 200,
-          height: 52,
-          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.centerLeft,
+        Expanded(
+          child: Container(
+            child: Row(
+              children: <Widget>[
+                Icon(
+                    user.userInfo[index].status
+                        ? Icons.notifications_off
+                        : Icons.notifications_active,
+                    color:
+                        user.userInfo[index].status ? Colors.red : Colors.green),
+                Text(user.userInfo[index].status ? 'Disabled' : 'Active')
+              ],
+            ),
+            height: 52,
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+          )
         ),
-        Container(
-          child: Text(user.userInfo[index].registerDate),
-          width: 100,
-          height: 52,
-          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.centerLeft,
+        Expanded(
+          child: Container(
+            child: Text(user.userInfo[index].phone),
+            height: 52,
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+          )
         ),
-        Container(
-          width: 200,
-          height: 52,
-          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-          alignment: Alignment.centerLeft,
-          child: Text(user.userInfo[index].terminationDate),
+        Expanded(
+          child: Container(
+            child: Text(user.userInfo[index].registerDate),
+            height: 52,
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+          )
         ),
-        Container(
-          width: 50,
-          child: FlatButton(
-            onPressed: () => {},
-            child: Icon(Icons.add),
-          ),
-        )
+        Expanded(
+          child: Container(
+            height: 52,
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            alignment: Alignment.centerLeft,
+            child: Text(user.userInfo[index].terminationDate),
+          )
+        ),
+        Expanded(
+          child: Container(
+            child: FlatButton(
+              onPressed: () => {},
+              child: Icon(Icons.add),
+            ),
+          )
+        ),
       ],
     );
   }
