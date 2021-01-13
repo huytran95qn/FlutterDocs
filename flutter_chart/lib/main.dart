@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chart/screens/crosshair_chart.dart';
+import 'package:flutter_chart/screens/crosshair/crosshair_chart.dart';
 import 'package:flutter_chart/screens/eChart.dart';
-import 'package:flutter_chart/screens/select_data_point.dart';
-import 'package:flutter_chart/screens/tooltip_chart.dart';
-import 'package:flutter_chart/screens/trackball.dart';
-import 'package:flutter_chart/screens/zoom_chart.dart';
+import 'package:flutter_chart/screens/selection/select_data_point.dart';
+import 'package:flutter_chart/screens/tooltip/tooltip_chart.dart';
+import 'package:flutter_chart/screens/trackball/trackball.dart';
 
+import 'screens/zoom/module.dart';
 import 'widgets/tab/module.dart';
 
 void main() {
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           CustomTabWidget(
             header: Text('Zoom Behavior', style: TextStyle(color: Colors.black)),
-            body: ZoomChart(),
+            body: ZoomMain(),
             onPress: () => {}
           ),
           CustomTabWidget(

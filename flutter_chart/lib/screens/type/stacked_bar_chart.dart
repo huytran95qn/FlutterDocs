@@ -19,7 +19,7 @@ class StackedBarChart {
         pointColorMapper: (PopularColorData item, _) => Colors.red,
         xValueMapper: (PopularColorData item, _) => item.color,
         yValueMapper: (PopularColorData item, _) => item.data[0].percentage,
-        selectionBehavior: selection
+        selectionBehavior: selection != null ? selection : null
       ),
       StackedBarSeries<PopularColorData, String>(
         dataSource: dataSource,
@@ -28,7 +28,7 @@ class StackedBarChart {
         pointColorMapper: (PopularColorData item, _) => Colors.yellow,
         xValueMapper: (PopularColorData item, _) => item.color,
         yValueMapper: (PopularColorData item, _) => item.data[1].percentage,
-        selectionBehavior: selection
+        selectionBehavior: selection != null ? selection : null
       ),
       StackedBarSeries<PopularColorData, String>(
         dataSource: dataSource,
@@ -37,7 +37,7 @@ class StackedBarChart {
         pointColorMapper: (PopularColorData item, _) => Colors.green,
         xValueMapper: (PopularColorData item, _) => item.color,
         yValueMapper: (PopularColorData item, _) => item.data[2].percentage,
-        selectionBehavior: selection
+        selectionBehavior: selection != null ? selection : null
       )
     ];
   }

@@ -19,22 +19,22 @@ class LineSeriesChart {
         xValueMapper: (PopularColorData item, _) => item.color,
         yValueMapper: (PopularColorData item, _) => item.data[0].percentage
       ),
-      LineSeries<PopularColorData, String>(
-        dataSource: dataSource,
-        sortingOrder: SortingOrder.descending,
-        sortFieldValueMapper: (PopularColorData item, _) => item.color,
-        pointColorMapper: (PopularColorData item, _) => Colors.yellow,
-        xValueMapper: (PopularColorData item, _) => item.color,
-        yValueMapper: (PopularColorData item, _) => item.data[1].percentage
-      ),
-      LineSeries<PopularColorData, String>(
-        dataSource: dataSource,
-        sortingOrder: SortingOrder.descending,
-        sortFieldValueMapper: (PopularColorData item, _) => item.color,
-        pointColorMapper: (PopularColorData item, _) => Colors.green,
-        xValueMapper: (PopularColorData item, _) => item.color,
-        yValueMapper: (PopularColorData item, _) => item.data[2].percentage
-      )
+      // LineSeries<PopularColorData, String>(
+      //   dataSource: dataSource,
+      //   sortingOrder: SortingOrder.descending,
+      //   sortFieldValueMapper: (PopularColorData item, _) => item.color,
+      //   pointColorMapper: (PopularColorData item, _) => Colors.yellow,
+      //   xValueMapper: (PopularColorData item, _) => item.color,
+      //   yValueMapper: (PopularColorData item, _) => item.data[1].percentage
+      // ),
+      // LineSeries<PopularColorData, String>(
+      //   dataSource: dataSource,
+      //   sortingOrder: SortingOrder.descending,
+      //   sortFieldValueMapper: (PopularColorData item, _) => item.color,
+      //   pointColorMapper: (PopularColorData item, _) => Colors.green,
+      //   xValueMapper: (PopularColorData item, _) => item.color,
+      //   yValueMapper: (PopularColorData item, _) => item.data[2].percentage
+      // )
     ];
   }
 }

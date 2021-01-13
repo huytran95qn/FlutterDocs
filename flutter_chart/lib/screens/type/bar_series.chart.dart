@@ -10,8 +10,8 @@ class BarSeriesChart {
   }
 
   series() {
-    return <BarSeries<PopularColorData, String>>[
-      BarSeries<PopularColorData, String>(
+    return <ColumnSeries<PopularColorData, String>>[
+      ColumnSeries<PopularColorData, String>(
         dataSource: dataSource,
         sortingOrder: SortingOrder.descending,
         sortFieldValueMapper: (PopularColorData item, _) => item.color,
@@ -19,7 +19,7 @@ class BarSeriesChart {
         xValueMapper: (PopularColorData item, _) => item.color,
         yValueMapper: (PopularColorData item, _) => item.data[0].percentage
       ),
-      BarSeries<PopularColorData, String>(
+      ColumnSeries<PopularColorData, String>(
         dataSource: dataSource,
         sortingOrder: SortingOrder.descending,
         sortFieldValueMapper: (PopularColorData item, _) => item.color,
@@ -27,7 +27,7 @@ class BarSeriesChart {
         xValueMapper: (PopularColorData item, _) => item.color,
         yValueMapper: (PopularColorData item, _) => item.data[1].percentage
       ),
-      BarSeries<PopularColorData, String>(
+      ColumnSeries<PopularColorData, String>(
         dataSource: dataSource,
         sortingOrder: SortingOrder.descending,
         sortFieldValueMapper: (PopularColorData item, _) => item.color,
