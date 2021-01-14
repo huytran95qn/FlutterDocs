@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'horizontal_scroll/horizontal_srcoll.dart';
@@ -67,13 +69,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _getItemHorizontalScroll() {
     List<Widget> _list = [];
-    Widget _itemDefault = Container(
-      width: 200,
-      height: 200,
-      color: Colors.red,
-      margin: EdgeInsets.all(16),
-    );
+    
     for (var i = 0; i < _counter; i++) {
+      Widget _itemDefault = Container(
+        width: 200,
+        height: 200,
+        color: Colors.red,
+        margin: EdgeInsets.all(16),
+        alignment: Alignment.center,
+        child: Text('$i', style: TextStyle(fontSize: 30)),
+      );
       _list.add(_itemDefault);
     }
 
