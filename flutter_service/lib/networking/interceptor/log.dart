@@ -12,5 +12,4 @@ class LoggingInterceptor implements InterceptorContract {
     print(data);
     return data;
   }
-
 }
